@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dagger)
+    id("kotlin-kapt")
 }
 
 android {
@@ -40,4 +42,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson.convertor)
+
+    implementation(project(":feature:search:domain"))
+
+    implementation(libs.dagger.hilt)
+    implementation(libs.dagger.kapt)
 }
