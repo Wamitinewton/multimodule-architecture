@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.newton.media_player"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -29,6 +29,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    packaging {
+        resources {
+            excludes += "META-INF/gradle/incremental.annotation.processors"
+        }
     }
 }
 

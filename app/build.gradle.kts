@@ -2,11 +2,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dagger)
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.newton.recipe_multimodule"
     compileSdk = 35
+
+    packaging {
+        resources {
+            excludes += "META-INF/gradle/incremental.annotation.processors"
+        }
+    }
 
     defaultConfig {
         applicationId = "com.newton.recipe_multimodule"
@@ -41,6 +49,12 @@ android {
 
 dependencies {
 
+    implementation(project(":common"))
+    implementation(project(":media_player"))
+    implementation(project(":feature:search:data"))
+    implementation(project(":feature:search:domain"))
+    implementation(project(":feature:search:ui"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -50,8 +64,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity)
-    implementation(project(":common"))
-    implementation(project(":media_player"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -59,4 +71,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.navigation.compose)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.kapt)
+}
+
+hilt {
+    enableAggregatingTask = false
 }
