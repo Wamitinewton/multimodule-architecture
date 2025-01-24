@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.retrofit.gson.convertor)
 
     implementation(project(":feature:search:domain"))
+    implementation(project(":common"))
 
     implementation(libs.dagger.hilt)
     implementation(libs.dagger.kapt)

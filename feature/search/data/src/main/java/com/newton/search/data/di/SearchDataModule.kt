@@ -1,6 +1,8 @@
 package com.newton.search.data.di
 
 import com.newton.search.data.remote.SearchApiService
+import com.newton.search.data.repository.SearchRepositoryImpl
+import com.newton.search.domain.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +29,10 @@ object SearchDataModule {
     @Provides
     fun provideSearchApiService(retrofit: Retrofit): SearchApiService {
         return retrofit.create(SearchApiService::class.java)
+    }
+
+    @Provides
+    fun provideSearchRepo(searchApiService: SearchApiService): SearchRepository {
+        return SearchRepositoryImpl(searchApiService)
     }
 }
